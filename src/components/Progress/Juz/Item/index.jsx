@@ -1,11 +1,27 @@
 import { Text, View, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { showMessage } from 'react-native-flash-message'
 
-
-const ProgressJuzItem = ({ juz }) => {
+const ProgressJuzItem = ({ juz, navigation }) => {
     const memorized = juz.item.memorized ?? 0
+    
+    const navigateToSurah = (target) => {
+        if (!target) return null
+        const juzNo = Number(target.replace(/^juz/,''))
+        if (juzNo !== 30) return showMessage({
+            message: "Halaman yang diminta belum tersedia saat ini.",
+            type: 'warning',
+            color: '#472a00'
+        });
+        navigation.navigate('Mushaf', {
+            pageIndex: 22
+        })
+    }
+
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => navigateToSurah(juz?.item?.id)}
+        >
             <View
                 style={{
                     marginBottom: 8,

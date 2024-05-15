@@ -1231,7 +1231,8 @@ export const SurahItems = [
     arabicName: "النبأ",
     numberOfAyah: "40",
     meaning: "Berita Besar",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 22,
   },
   {
     id: "surah_79",
@@ -1240,7 +1241,8 @@ export const SurahItems = [
     arabicName: "النّٰزعٰت",
     numberOfAyah: "46",
     meaning: "Malaikat Yang Mencabut",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 21,
   },
   {
     id: "surah_80",
@@ -1249,7 +1251,8 @@ export const SurahItems = [
     arabicName: "عبس",
     numberOfAyah: "42",
     meaning: "Bermuka Masam",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 19,
   },
   {
     id: "surah_81",
@@ -1258,7 +1261,8 @@ export const SurahItems = [
     arabicName: "التكوير",
     numberOfAyah: "29",
     meaning: "Penggulungan",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 18,
   },
   {
     id: "surah_82",
@@ -1267,7 +1271,8 @@ export const SurahItems = [
     arabicName: "الانفطار",
     numberOfAyah: "19",
     meaning: "Terbelah",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 17,
   },
   {
     id: "surah_83",
@@ -1276,7 +1281,8 @@ export const SurahItems = [
     arabicName: "المطفّفين",
     numberOfAyah: "36",
     meaning: "Orang-Orang Curang",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 17,
   },
   {
     id: "surah_84",
@@ -1285,7 +1291,8 @@ export const SurahItems = [
     arabicName: "الانشقاق",
     numberOfAyah: "25",
     meaning: "Terbelah",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 15,
   },
   {
     id: "surah_85",
@@ -1294,7 +1301,8 @@ export const SurahItems = [
     arabicName: "البروج",
     numberOfAyah: "22",
     meaning: "Gugusan Bintang",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 14,
   },
   {
     id: "surah_86",
@@ -1303,7 +1311,8 @@ export const SurahItems = [
     arabicName: "الطارق",
     numberOfAyah: "17",
     meaning: "Yang Datang Di Malam Hari",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 13,
   },
   {
     id: "surah_87",
@@ -1312,7 +1321,8 @@ export const SurahItems = [
     arabicName: "الأعلى",
     numberOfAyah: "19",
     meaning: "Maha Tinggi",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 13,
   },
   {
     id: "surah_88",
@@ -1321,7 +1331,8 @@ export const SurahItems = [
     arabicName: "الغاشية",
     numberOfAyah: "26",
     meaning: "Hari Kiamat",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 12,
   },
   {
     id: "surah_89",
@@ -1330,7 +1341,8 @@ export const SurahItems = [
     arabicName: "الفجر",
     numberOfAyah: "30",
     meaning: "Fajar",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 11,
   },
   {
     id: "surah_90",
@@ -1339,7 +1351,8 @@ export const SurahItems = [
     arabicName: "البلد",
     numberOfAyah: "20",
     meaning: "Negeri",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 10,
   },
   {
     id: "surah_91",
@@ -1348,7 +1361,8 @@ export const SurahItems = [
     arabicName: "الشمس",
     numberOfAyah: "15",
     meaning: "Matahari",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 9,
   },
   {
     id: "surah_92",
@@ -1357,7 +1371,8 @@ export const SurahItems = [
     arabicName: "الّيل",
     numberOfAyah: "21",
     meaning: "Malam",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 9,
   },
   {
     id: "surah_93",
@@ -1366,7 +1381,8 @@ export const SurahItems = [
     arabicName: "الضحى",
     numberOfAyah: "11",
     meaning: "Duha",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 8,
   },
   {
     id: "surah_94",
@@ -1375,7 +1391,8 @@ export const SurahItems = [
     arabicName: "الشرح",
     numberOfAyah: "8",
     meaning: "Lapang",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 8,
   },
   {
     id: "surah_95",
@@ -1384,7 +1401,8 @@ export const SurahItems = [
     arabicName: "التين",
     numberOfAyah: "8",
     meaning: "Buah Tin",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 7,
   },
   {
     id: "surah_96",
@@ -1393,7 +1411,8 @@ export const SurahItems = [
     arabicName: "العلق",
     numberOfAyah: "19",
     meaning: "Segumpal Darah",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 7,
   },
   {
     id: "surah_97",
@@ -1402,7 +1421,8 @@ export const SurahItems = [
     arabicName: "القدر",
     numberOfAyah: "5",
     meaning: "Kemuliaan",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 6,
   },
   {
     id: "surah_98",
@@ -1411,7 +1431,8 @@ export const SurahItems = [
     arabicName: "البيّنة",
     numberOfAyah: "8",
     meaning: "Bukti Nyata",
-    category: "Madaniyah"
+    category: "Madaniyah",
+    page: 6,
   },
   {
     id: "surah_99",
@@ -1420,7 +1441,8 @@ export const SurahItems = [
     arabicName: "الزلزلة",
     numberOfAyah: "8",
     meaning: "Guncangan",
-    category: "Madaniyah"
+    category: "Madaniyah",
+    page: 5,
   },
   {
     id: "surah_100",
@@ -1429,7 +1451,8 @@ export const SurahItems = [
     arabicName: "العٰديٰت",
     numberOfAyah: "11",
     meaning: "Kuda Yang Berlari Kencang",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 5,
   },
   {
     id: "surah_101",
@@ -1438,7 +1461,8 @@ export const SurahItems = [
     arabicName: "القارعة",
     numberOfAyah: "11",
     meaning: "Hari Kiamat",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 4,
   },
   {
     id: "surah_102",
@@ -1447,7 +1471,8 @@ export const SurahItems = [
     arabicName: "التكاثر",
     numberOfAyah: "8",
     meaning: "Bermegah-Megahan",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 4,
   },
   {
     id: "surah_103",
@@ -1456,7 +1481,8 @@ export const SurahItems = [
     arabicName: "العصر",
     numberOfAyah: "3",
     meaning: "Asar",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 3,
   },
   {
     id: "surah_104",
@@ -1465,7 +1491,8 @@ export const SurahItems = [
     arabicName: "الهمزة",
     numberOfAyah: "9",
     meaning: "Pengumpat",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 3,
   },
   {
     id: "surah_105",
@@ -1474,7 +1501,8 @@ export const SurahItems = [
     arabicName: "الفيل",
     numberOfAyah: "5",
     meaning: "Gajah",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 3,
   },
   {
     id: "surah_106",
@@ -1483,7 +1511,8 @@ export const SurahItems = [
     arabicName: "قريش",
     numberOfAyah: "4",
     meaning: "Quraisy",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 2,
   },
   {
     id: "surah_107",
@@ -1492,7 +1521,8 @@ export const SurahItems = [
     arabicName: "الماعون",
     numberOfAyah: "7",
     meaning: "Barang Yang Berguna",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 2,
   },
   {
     id: "surah_108",
@@ -1501,7 +1531,8 @@ export const SurahItems = [
     arabicName: "الكوثر",
     numberOfAyah: "3",
     meaning: "Pemberian Yang Banyak",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 2,
   },
   {
     id: "surah_109",
@@ -1510,7 +1541,8 @@ export const SurahItems = [
     arabicName: "الكٰفرون",
     numberOfAyah: "6",
     meaning: "Orang-Orang kafir",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 1,
   },
   {
     id: "surah_110",
@@ -1519,7 +1551,8 @@ export const SurahItems = [
     arabicName: "النصر",
     numberOfAyah: "3",
     meaning: "Pertolongan",
-    category: "Madaniyah"
+    category: "Madaniyah",
+    page: 1,
   },
   {
     id: "surah_111",
@@ -1528,7 +1561,8 @@ export const SurahItems = [
     arabicName: "اللهب",
     numberOfAyah: "5",
     meaning: "Api Yang Bergejolak",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 1,
   },
   {
     id: "surah_112",
@@ -1537,7 +1571,8 @@ export const SurahItems = [
     arabicName: "الإخلاص",
     numberOfAyah: "4",
     meaning: "Ikhlas",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 0,
   },
   {
     id: "surah_113",
@@ -1546,7 +1581,8 @@ export const SurahItems = [
     arabicName: "الفلق",
     numberOfAyah: "5",
     meaning: "Subuh",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 0,
   },
   {
     id: "surah_114",
@@ -1555,7 +1591,8 @@ export const SurahItems = [
     arabicName: "الناس",
     numberOfAyah: "6",
     meaning: "Manusia",
-    category: "Makiyah"
+    category: "Makiyah",
+    page: 0,
   }
 ]
 

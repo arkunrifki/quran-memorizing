@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 12,
         flexGrow: 1,
+        width: '80%'
     }
 })
 
@@ -101,7 +102,7 @@ const TikrarDuration = ({ total = 10, durationTarget = 70 }) => {
                 </View>
                 <View
                     style={{
-                        paddingRight: 20,
+                        paddingRight: 4,
                         marginLeft: 4,
                         flexGrow: 1,
                         width: 32,

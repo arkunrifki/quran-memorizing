@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { View, Platform, StyleSheet, TouchableOpacity, Text } from "react-native"
+import { useState, useEffect, useMemo } from 'react'
+import { View, Platform, StyleSheet, TouchableOpacity, Text, BackHandler } from "react-native"
 import { FontAwesome } from '@expo/vector-icons';
-import DropDownPicker from "react-native-dropdown-picker";
 import { SurahItems } from 'utils/constants';
+// import SelectDropdown from 'react-native-select-dropdown';
+import SelectDropdown from 'lib/SelectDropdown'
 
 import {
     AVAILABLE_QARI_NAMES,
@@ -25,7 +26,14 @@ const AudioConfig = ({
     forwardedRef,
     ...props
 }) => {
-    const { dispatch } = usePlayerProvider()
+    const { dispatch, playerState } = usePlayerProvider()
+    const { rawData } = playerState
+    const {
+        surahStart = null,
+        ayahStart = null,
+        surahEnd = null,
+        ayahEnd = null,
+    } = rawData || {}
     const [optionsVisibility, setOptionsVisibility] = useState({
         startFromSurah: false,
         startFromAyah: false,
@@ -35,22 +43,15 @@ const AudioConfig = ({
         repeat: false,
         delay: false
     })
-    const [startFromOptions, setStartFromOptions] = useState({
-        surah: SurahItems.map((surah) => ({ value: Number(surah.no), label: surah.name})),
-        ayah: []
-    })
+
     const [startFrom, setStartFrom] = useState({
-        surah: 1,
-        ayah: 1
+        surah: null,
+        ayah: null,
     })
-    // console.log(startFromOptions.ayah)
-    const [untilOptions, setUntilOptions] = useState({
-        surah: SurahItems.map((surah) => ({ value: Number(surah.no), label: surah.name})),
-        ayah: [],
-    })
+
     const [until, setUntil] = useState({
-        surah: 1,
-        ayah: 1
+        surah: null,
+        ayah: null,
     })
     const [qariOptions, setQariOptions] = useState(
         Object.keys(AVAILABLE_QARI_NAMES)
@@ -69,7 +70,6 @@ const AudioConfig = ({
     )
     const [delay, setDelay] = useState(delayOptions[0].value)
 
-
     const handleSetOpen = (targetKey) => {
         setOptionsVisibility((prev) => {
             return {
@@ -87,14 +87,108 @@ const AudioConfig = ({
         })
     }
 
+    const startFromOptions = useMemo(() => {
+        const surahIndex = startFrom.surah ? startFrom.surah - 1 : surahStart ? surahStart - 1 : 0
+        const numberOfAyah = SurahItems[surahIndex].numberOfAyah
+        return {
+            surah: SurahItems.map((surah) => {
+                return {
+                    value: Number(surah.no), label: surah.name
+                }
+            }),
+            ayah: (() => {
+                const ayah = []
+                for (let i = 1; i <= numberOfAyah; i++) {
+                    ayah.push({ value: i, label: i })
+                }
+                return ayah
+            })()
+        }
+    },[surahStart,ayahStart, startFrom.surah, startFrom.ayah])
+
+    const defaultStartFrom = useMemo(() => {
+        const surahNumber = startFrom.surah ? startFrom.surah : surahStart ? surahStart : 1
+        const ayahNumber = startFrom.ayah ? startFrom.ayah : ayahStart ? ayahStart : 1
+        return {
+            surah: startFromOptions.surah.find((surah) => surah.value === Number(surahNumber)),
+            ayah: startFromOptions.ayah.find((ayah) => ayah.value === Number(ayahNumber))
+        }
+    },[startFromOptions,surahStart, startFrom.surah, startFrom.ayah])
+
+    const untilOptions = useMemo(() => {
+        const surahNumber = until.surah ? until.surah : surahEnd
+        return {
+            surah: startFromOptions.surah.filter((surah) => {
+                if (startFrom.surah) return surah.value >= startFrom.surah
+                return surah.value >= defaultStartFrom.surah.value
+            }),
+            ayah: (() => {
+                // If start from and until same
+                if (
+                    surahStart === surahEnd ||
+                    defaultStartFrom?.surah?.value === until.surah
+                ) {
+                    return startFromOptions.ayah.filter((ayah) => {
+                        if (startFrom.ayah) return ayah.value >= startFrom.ayah
+                        return ayah.value >= defaultStartFrom.ayah.value
+                    })
+                }
+                // else
+                const ayah = []
+                for (let i = 1; i <= SurahItems[surahNumber - 1].numberOfAyah; i++) {
+                    ayah.push({ value: i, label: i })
+                }
+                return ayah
+            })()
+        }
+    },[
+        startFrom.surah,
+        startFrom.ayah,
+        startFromOptions,
+        defaultStartFrom,
+        until.surah,
+        until.ayah,
+    ])
+
+    const defaultUntil = useMemo(() => {
+        const surahNumber = until.surah ? until.surah : surahEnd ? surahEnd : 1
+        const ayahNumber = until.ayah ? until.ayah : ayahEnd ? ayahEnd : 1
+        return {
+            surah: untilOptions.surah.find((surah) => surah.value === Number(surahNumber)),
+            ayah: untilOptions.ayah.find((ayah) => ayah.value === Number(ayahNumber))
+        }
+    },[surahEnd, ayahEnd, until.surah, until.ayah, untilOptions])
+
+    useEffect(() => {
+        if (startFrom.surah) {
+            setUntil((prev) => ({ ...prev, surah: startFrom.surah }))
+            setStartFrom((prev) => ({ ...prev, ayah: 1 }))
+        }
+    },[startFrom.surah])
+
+    useEffect(() => {
+        if (until.surah) {
+            setUntil((prev) => ({ ...prev, ayah: startFrom.ayah }))
+        }
+    },[startFrom.ayah])
+
     const handlePlay = () => {
         const playlistItems = generatePlaylistItems(
-            startFrom.surah,
-            startFrom.ayah,
-            until.surah,
-            until.ayah,
+            startFrom.surah ?? defaultStartFrom.surah.value,
+            startFrom.ayah ?? defaultStartFrom.ayah.value,
+            until.surah ?? defaultUntil.surah.value,
+            until.ayah ?? defaultUntil.ayah.value,
             qari,
         )
+        dispatch({
+            type: 'SET_RAW_DATA',
+            payload: {
+                surahStart: startFrom.surah ?? defaultStartFrom.surah.value,
+                ayahStart: startFrom.ayah ?? defaultStartFrom.ayah.value,
+                surahEnd: until.surah ?? defaultUntil.surah.value,
+                ayahEnd: until.ayah ?? defaultUntil.ayah.value,
+            }
+        })
         dispatch({
             type: 'SET_ALL_PLAYER_DATA',
             payload: {
@@ -108,65 +202,39 @@ const AudioConfig = ({
         forwardedRef.current.close()
     }
 
-    useEffect(() => {
-        const numberOfAyah = SurahItems[startFrom.surah - 1].numberOfAyah
-        setStartFromOptions((prev) => {
-            return {
-                ...prev,
-                ayah: (() => {
-                    const ayah = []
-                    for (let i = 1; i <= numberOfAyah; i++) {
-                        ayah.push({ value: i, label: i })
-                    }
-                    return ayah
-                })()
-            }
+    const onSearchSurah = (q, data) => {
+        return data.filter((surah) => {
+            const surahName = String(surah.label).toLowerCase()
+            const aliases = [
+                surahName,
+                surahName.replace('-',''),
+                surahName.replace('-', ' '),
+                surahName.replace(/'/g, ''),
+            ]
+            if (aliases.some(alias => alias.includes(q.toLowerCase()))) return surah 
+            return false
         })
-        setUntilOptions((prev) => {
-            return {
-                ...prev,
-                surah:
-                    SurahItems.slice(startFrom.surah - 1)
-                    .map((surah) => ({ value: Number(surah.no), label: surah.name})),
-            }
+    }
+
+    const onAyahSearch = (q, data) => {
+        return data.filter((ayah) => {
+            const ayahNumber = String(ayah.label).toLowerCase()
+            if (ayahNumber.includes(q.toLowerCase())) return ayah
+            return false
         })
-        setUntil((prev) => ({ ...prev, surah: startFrom.surah }))
-        setStartFrom((prev) => ({ ...prev, ayah: 1 }))
-    },[startFrom.surah])
+    }
 
     useEffect(() => {
-        const numberOfAyah = SurahItems[until.surah - 1].numberOfAyah
-        setUntilOptions((prev) => {
-            return {
-                ...prev,
-                ayah: (() => {
-                    const ayah = []
-                    for (let i = startFrom.ayah; i <= numberOfAyah; i++) {
-                        ayah.push({ value: i, label: i })
-                    }
-                    return ayah
-                })()
-            }
-        })
-        setUntil((prev) => ({ ...prev, ayah: startFrom.ayah }))
-    },[startFrom.ayah])
-
-    useEffect(() => {
-        const numberOfAyah = SurahItems[until.surah - 1].numberOfAyah
-        setUntilOptions((prev) => {
-            return {
-                ...prev,
-                ayah: (() => {
-                    const ayah = []
-                    for (let i = 1; i <= numberOfAyah; i++) {
-                        ayah.push({ value: i, label: i })
-                    }
-                    return ayah
-                })()
-            }
+        const backAction = () => {
+            forwardedRef.current.close()
+            return true
         }
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction,
         )
-    },[until.surah])
+        return () => backHandler.remove()
+    },[])
 
     return (
         <View style={styles.container}>
@@ -213,34 +281,70 @@ const AudioConfig = ({
                         }}
                     >
                         <Text style={{ marginBottom: 8 }}>Putar dari surat</Text>
-                        <DropDownPicker
-                            open={optionsVisibility.startFromSurah}
-                            value={startFrom.surah}
-                            items={startFromOptions.surah}
-                            setOpen={() => handleSetOpen('startFromSurah')}
-                            setValue={(value) => setStartFrom((prev) => ({...prev, surah: value()}))}
-                            onChangeValue={() => {}}
-                            style={{
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 0,
+                        <SelectDropdown
+                            data={startFromOptions.surah}
+                            onSearch={onSearchSurah}
+                            defaultValue={defaultStartFrom.surah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setStartFrom((prev) => ({...prev, surah: selectedItem.value}))
                             }}
-                            placeholder="Surat"
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Surat"
                         />
                     </View>
                     <View style={{ width: '30%'}}>
                         <Text style={{ marginBottom: 8 }}>Ayat</Text>
-                        <DropDownPicker
-                            open={optionsVisibility.startFromAyah}
-                            value={startFrom.ayah}
-                            items={startFromOptions.ayah}
-                            setOpen={() => handleSetOpen('startFromAyah')}
-                            setValue={(value) => setStartFrom((prev) => ({...prev, ayah: value()}))}
-                            onChangeValue={() => {}}
-                            style={{
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 0,
+                        <SelectDropdown
+                            data={startFromOptions.ayah}
+                            onSearch={onAyahSearch}
+                            defaultValue={defaultStartFrom.ayah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setStartFrom((prev) => ({...prev, ayah: selectedItem.value}))
                             }}
-                            placeholder="Ayat"
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Ayat"
                         />
                     </View>
                 </View>
@@ -259,34 +363,70 @@ const AudioConfig = ({
                         marginBottom: 12,
                     }}>
                         <Text style={{ marginBottom: 8 }}>Sampai surat</Text>
-                        <DropDownPicker
-                            open={optionsVisibility.untilSurah}
-                            value={until.surah}
-                            items={untilOptions.surah}
-                            setOpen={() => handleSetOpen('untilSurah')}
-                            setValue={(value) => setUntil((prev) => ({...prev, surah: value()}))}
-                            onChangeValue={() => {}}
-                            style={{
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 0,
+                        <SelectDropdown
+                            data={untilOptions.surah}
+                            onSearch={onSearchSurah}
+                            defaultValue={defaultUntil.surah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setUntil((prev) => ({...prev, surah: selectedItem.value}))
                             }}
-                            placeholder="Surat"
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Surat"
                         />
                     </View>
                     <View style={{ width: '30%'}}>
                         <Text style={{ marginBottom: 8 }}>Ayat</Text>
-                        <DropDownPicker
-                            open={optionsVisibility.untilAyah}
-                            value={until.ayah}
-                            items={untilOptions.ayah}
-                            setOpen={() => handleSetOpen('untilAyah')}
-                            setValue={(value) => setUntil((prev) => ({...prev, ayah: value()}))}
-                            onChangeValue={() => {}}
-                            style={{
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 0,
+                        <SelectDropdown
+                            data={untilOptions.ayah}
+                            onSearch={onAyahSearch}
+                            defaultValue={until.surah ? untilOptions.ayah[0] : defaultUntil.ayah}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setUntil((prev) => ({...prev, ayah: selectedItem.value}))
                             }}
-                            placeholder="Ayat"
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Ayat"
                         />
                     </View>
                 </View>
@@ -299,18 +439,35 @@ const AudioConfig = ({
                     }}
                 >
                     <Text style={{ marginBottom: 8 }}>Qari</Text>
-                    <DropDownPicker
-                        open={optionsVisibility.qari}
-                        value={qari}
-                        items={qariOptions}
-                        setOpen={() => handleSetOpen('qari')}
-                        setValue={(value) => setQari(value())}
-                        onChangeValue={() => {}}
-                        style={{
-                            backgroundColor: '#F7F7F7',
-                            borderWidth: 0,
+                    <SelectDropdown
+                        data={qariOptions}
+                        defaultValue={qariOptions[0]}
+                        rowTextForSelection={(item) => item.label}
+                        onSelect={(selectedItem) => {
+                            setQari(selectedItem.value)
                         }}
-                        placeholder="Qari"
+                        buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                        search={true}
+                        buttonStyle={{
+                            backgroundColor: '#F7F7F7',
+                            width: '100%',
+                            borderRadius: 8,
+                            height: 40,
+                        }}
+                        buttonTextStyle={{
+                            fontSize: 14,
+                            textAlign: 'left'
+                        }}
+                        rowStyle={{
+                            backgroundColor: '#F7F7F7',
+                            height: 40,
+                            borderBottomColor: '#e0e0e0',
+                        }}
+                        rowTextStyle={{
+                            fontSize: 14,
+                            textAlign: 'left'
+                        }}
+                        defaultButtonText="Pilih Qari"
                     />
                 </View>
                 <View
@@ -323,32 +480,68 @@ const AudioConfig = ({
                 >
                     <View style={{ flexGrow: 1, maxWidth: '65%', marginRight: '5%' }}>
                         <Text style={{ marginBottom: 8 }}>Ulangi pemutaran sebanyak</Text>
-                        <DropDownPicker
-                            open={optionsVisibility.repeat}
-                            value={repeat}
-                            items={repeatOptions}
-                            setOpen={() => handleSetOpen('repeat')}
-                            setValue={(value) => setRepeat(value())}
-                            onChangeValue={() => {}}
-                            style={{
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 0,
+                        <SelectDropdown
+                            data={repeatOptions}
+                            defaultValue={repeatOptions[0]}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setRepeat(selectedItem.value)
                             }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Pilih Jumlah Pemutaran"
                         />
                     </View>
                     <View style={{ flexGrow: 1, maxWidth: '30%' }}>
                         <Text style={{ marginBottom: 8 }}>Jeda tiap ayat</Text>
-                        <DropDownPicker
-                            open={optionsVisibility.delay}
-                            value={delay}
-                            items={delayOptions}
-                            setOpen={() => handleSetOpen('delay')}
-                            setValue={(value) => setDelay(value())}
-                            onChangeValue={() => {}}
-                            style={{
-                                backgroundColor: '#F7F7F7',
-                                borderWidth: 0,
+                        <SelectDropdown
+                            data={delayOptions}
+                            defaultValue={delayOptions[0]}
+                            rowTextForSelection={(item) => item.label}
+                            onSelect={(selectedItem) => {
+                                setDelay(selectedItem.value)
                             }}
+                            buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                            search={true}
+                            buttonStyle={{
+                                backgroundColor: '#F7F7F7',
+                                width: '100%',
+                                borderRadius: 8,
+                                height: 40,
+                            }}
+                            buttonTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            rowStyle={{
+                                backgroundColor: '#F7F7F7',
+                                height: 40,
+                                borderBottomColor: '#e0e0e0',
+                            }}
+                            rowTextStyle={{
+                                fontSize: 14,
+                                textAlign: 'left'
+                            }}
+                            defaultButtonText="Jeda"
                         />
                     </View>
                 </View>

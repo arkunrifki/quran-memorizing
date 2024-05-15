@@ -1,6 +1,9 @@
 import { View, StyleSheet, Text, Image } from "react-native"
 import OnBoardingButton from "components/Buttons/OnBoarding"
 import AccentPattern from "assets/accent-pattern.png"
+import { useOnBoardingState } from "context/OnBoardingContext"
+import { useEffect } from "react"
+import { useIsFocused } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
     container: {
@@ -20,6 +23,17 @@ const styles = StyleSheet.create({
 })
 
 const InputMemorization = ({ navigation }) => {
+    const isFocused = useIsFocused()
+    const { dispatch } = useOnBoardingState()
+
+    useEffect(() => {
+        if (isFocused) {
+            dispatch({
+                action: 'RESET_ONBOARDING_DATA'
+            })
+        }
+    },[isFocused])
+
     return (
         <View style={styles.container}>
             <Text style={styles.subtitle}>

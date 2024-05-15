@@ -7,30 +7,7 @@ import moment from 'moment';
 import 'moment/locale/id'
 moment.locale('id')
 
-const MEMORIZATION_HISTORY_DATA = [
-    {
-        surah: 'Al-Fatihah',
-        ayat: '25',
-        memorizedAt: 'Baru Saja'
-    },
-    {
-        surah: 'Al-Baqarah',
-        ayat: 25,
-        memorizedAt: '8 Jam yang lalu',
-    },
-    {
-        surah: 'Al-Maidah',
-        ayat: 51,
-        memorizedAt: '1 Hari yang lalu',
-    },
-    {
-        surah: 'Ad-Duha',
-        ayat: 11,
-        memorizedAt: '3 Hari yang lalu'
-    }
-]
-
-const MemorizationHistory = () => {
+const MemorizationHistory = ({ navigation }) => {
     const { userDataState } = useUserData()
     const { memorizationHistory } = userDataState
     const [memorizationHistoryData,setMemorizationHistoryData] = useState([])
@@ -56,19 +33,18 @@ const MemorizationHistory = () => {
                                 ayah={item.ayahNumber}
                                 memorizedAt={moment(item.memorizedAt).fromNow()}
                                 key={idx} style={{ marginBottom: 8}}
+                                navigation={navigation}
+                                item={item}
                             />
                         ))
                     ) : (
                         <View
                             style={{
-                                backgroundColor: '#e5e7eb',
-                                borderWidth: 1,
-                                borderColor: '#d1d5db',
-                                padding: 12,
+                                paddingVertical: 0,
                                 borderRadius: 4,
                             }}
                         >
-                            <Text style={{ color: '#6b7280' }}>Kamu belum memiliki riwayat hafalan.</Text>
+                            <Text style={{ color: '#4f4f4f' }}>Kamu belum memiliki riwayat hafalan.</Text>
                         </View>
                     )
                 }

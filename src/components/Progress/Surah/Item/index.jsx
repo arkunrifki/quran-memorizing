@@ -1,19 +1,62 @@
 import { Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { AntDesign } from '@expo/vector-icons';
+import { useMemo } from 'react';
+import { SurahItems } from 'utils/constants'
+import { useUserData } from 'context/UserDataContext';
+import { showMessage } from 'react-native-flash-message';
+import Content from 'assets/mushaf/juz30'
 
-const ProgressSurahItem = ({surah}) => {
+
+const ProgressSurahItem = ({surah, activeSurah = false, setActiveSurah, navigation }) => {
     const memorized = surah.item.memorized ?? 0
+    const { userDataState } = useUserData()
+
+    const active = useMemo(() => {
+        if (Number(activeSurah) === Number(surah.item.no)) return true
+        return false
+    },[activeSurah])
+
+    const surahContent = useMemo(() => {
+        // if (!activeSurah) return {}
+        return SurahItems[String(Number(surah?.item?.no) - 1)]
+    },[activeSurah])
+
+    const memorizedAyahs = useMemo(() => {
+        if (!active) return []
+        else return userDataState?.memorized?.surah[surah?.item?.no]
+    },[active])
+
+    const navigateToSurah = (targetType = 'surah', ayahNumber = null) => {
+        if (!surahContent?.hasOwnProperty('page')) return showMessage({
+            message: "Halaman yang diminta belum tersedia saat ini.",
+            type: 'warning',
+            color: '#472a00'
+        })
+        const content = Content()['metadata'].find(item => String(item.number) === String(surahContent.no))
+        const pageTarget = targetType === 'surah' ? surahContent?.page : content['ayah'][ayahNumber - 1]['pageIndex']
+        return navigation.navigate('Mushaf', {
+            pageIndex: Number(pageTarget),
+            activeAyah: targetType === 'surah' ? null : `${surahContent.no}:${ayahNumber}`,
+        })
+    }
+
     return (
-        <TouchableOpacity>
-            <View
+        <View
+            style={{
+                marginBottom: 8,
+                backgroundColor: '#FFFFFF',
+                borderWidth: 1,
+                borderColor: '#F0F0F0',
+                borderRadius: 8,
+            }}
+        >
+            <TouchableOpacity
                 style={{
-                    marginBottom: 8,
                     padding: 12,
-                    backgroundColor: '#FFFFFF',
-                    borderWidth: 1,
-                    borderColor: '#F0F0F0',
-                    borderRadius: 8,
+                    paddingBottom: 4,
                 }}
+                onPress={() => navigateToSurah()}
             >
                 <View
                     style={{
@@ -89,8 +132,85 @@ const ProgressSurahItem = ({surah}) => {
                     </Text>
                 </View>
             </View>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{
+                    backgroundColor: '#f2f2f2',
+                    padding: 8,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                }}
+                onPress={() => {
+                    if (!active) return setActiveSurah(surah.item.no)
+                    return setActiveSurah(null)
+                }}
+            >
+                <Text
+                    style={{
+                        fontSize: 12,
+                        fontWeight: '600',
+                        color: '#454545'
+                    }}
+                >{active ? 'Sembunyikan' : 'Lihat'} Ayat</Text>
+                {
+                    !active ? (
+                        <AntDesign name="caretdown" size={12} color="#969696" />
+                    ) : (
+                        <AntDesign name="caretup" size={12} color="#969696" />
+                    )
+                }
+            </TouchableOpacity>
+            {active && (
+                <View
+                    style={{
+                        paddingTop: 8,
+                        paddingBottom: 4,
+                        backgroundColor: '#fafafa',
+                        borderBottomRightRadius: 8,
+                        borderBottomLeftRadius:8,
+                    }}
+                >
+                    {Array.from({ length: Number(surahContent?.numberOfAyah) }, (_, i) => i + 1)
+                    .map((ayahItem) => {
+                        const isMemorized = memorizedAyahs?.includes(ayahItem)
+                        return (
+                            <TouchableOpacity
+                                key={ayahItem}
+                                style={{
+                                    marginHorizontal: 8,
+                                    backgroundColor: '#FFFFFF',
+                                    marginBottom: 4,
+                                    padding: 7,
+                                    borderRadius: 2,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                }}
+                                onPress={() => navigateToSurah('ayah', ayahItem)}
+                            >
+                                <Text style={{ fontSize: 12 }}>Ayat {ayahItem}</Text>
+                                <View>
+                                    {isMemorized ? (
+                                        <View>
+                                            <Text style={{ fontSize: 12, color: 'green'}}>
+                                                Sudah Hafal
+                                            </Text>
+                                        </View> 
+                                    ) : (
+                                        <View>
+                                            <Text style={{ fontSize: 12, color: 'gray'}}>
+                                                Belum Hafal
+                                            </Text>
+                                        </View> 
+                                    )}
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    })}
+                </View>
+            )}
+        </View>
     )
 }
 

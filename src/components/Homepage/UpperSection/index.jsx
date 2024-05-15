@@ -16,6 +16,7 @@ import { findJuzFromAyah } from 'utils/helpers';
 
 import { useIsFocused } from '@react-navigation/native'
 import _ from 'lodash'
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const styles = StyleSheet.create({
     container: {
@@ -40,6 +41,7 @@ const UpperSection = ({ navigation }) => {
         memorizedAyahInJuz: 0,
         totalAyahInJuz: 564,
         totalMemorizedInQuran: 0,
+        page: 0,
     })
     
     const handleIgnoreOnboarding = async () => {
@@ -86,7 +88,8 @@ const UpperSection = ({ navigation }) => {
                     juzName: lastJuzMemorized.label,
                     totalAyahInJuz: lastJuzMemorized.numberOfAyah,
                     memorizedAyahInJuz: userDataState.memorized.juz[findJuzFromAyah(lastSurahMemorizedNo,lastAyahMemorized)],
-                    totalMemorizedInQuran: totalMemorizedInQuran
+                    totalMemorizedInQuran: totalMemorizedInQuran,
+                    page: lastSurahMemorized?.page
                 })
             } else {
                 const lastMemorized = userDataState.memorizationHistory[0]
@@ -97,14 +100,26 @@ const UpperSection = ({ navigation }) => {
                 
                 setLastMemorizedData({
                     surahName: lastMemorized.surahName,
-                    memorizedAyah: lastMemorized.ayahNumber,
+                    memorizedAyah: userDataState?.memorized?.surah[lastMemorized?.surahNumber]?.length,
                     totalAyah: lastSurahMemorized.numberOfAyah,
+                    page: lastSurahMemorized?.page,
                     juzName: lastJuzMemorized.label,
                     totalAyahInJuz: lastJuzMemorized.numberOfAyah,
                     memorizedAyahInJuz: userDataState.memorized.juz[lastJuzMemorizedId],
                     totalMemorizedInQuran: totalMemorizedInQuran
                 })
             }
+        } else {
+            setLastMemorizedData({
+                surahName: 'An-Nas',
+                memorizedAyah: 0,
+                totalAyah: 6,
+                juzName: 'Juz 30',
+                memorizedAyahInJuz: 0,
+                totalAyahInJuz: 564,
+                totalMemorizedInQuran: 0,
+                page: 0,
+            })
         }
     },[isFocused])
 
@@ -116,11 +131,20 @@ const UpperSection = ({ navigation }) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Text style={{ fontSize: 14, fontWeight: '500', color: '#939393'}}>Pencapaian Hafalan</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                    <TouchableOpacity>
-                        <Ionicons name="settings" size={20} color="#CCCCCC" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ marginLeft: 24}}>
-                        <FontAwesome name="file-text" size={20} color="#CCCCCC" />
+                    {
+                        !onBoardingState?.initialUsage && (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Setting')}
+                            >
+                                <Ionicons name="settings" size={20} color="#454545" />
+                            </TouchableOpacity>
+                        )
+                    }
+                    <TouchableOpacity
+                        style={{ marginLeft: 24}}
+                        onPress={() => navigation.navigate('Notes')}
+                    >
+                        <FontAwesome name="file-text" size={20} color="#454545" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -129,6 +153,8 @@ const UpperSection = ({ navigation }) => {
                 surah={lastMemorizedData.surahName}
                 memorized={lastMemorizedData.memorizedAyah}
                 total={lastMemorizedData.totalAyah}
+                page={lastMemorizedData?.page}
+                navigation={navigation}
             />
             <View style={{ marginTop: 16, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <HomepageSecondaryPercentage
@@ -136,10 +162,11 @@ const UpperSection = ({ navigation }) => {
                     total={lastMemorizedData.totalAyahInJuz}
                     juz={lastMemorizedData.juzName}
                     style={{ flexGrow: 1 }}
+                    navigation={navigation}
                 />
                 <View style={{  paddingLeft: 16, borderLeftWidth: 1, borderLeftColor: '#EEEDED', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 16, fontWeight: '600'}}>
-                        {(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(1) * 100}%
+                        {String(Number(lastMemorizedData.totalMemorizedInQuran/6236).toPrecision(1) * 100).slice(0,4) + '%'}
                     </Text>
                     <Text style={{ fontWeight: '500', fontSize: 12, marginTop: 4 }}>
                         dari Alquran
@@ -204,30 +231,33 @@ const UpperSection = ({ navigation }) => {
                     </View>
                 )
             }
-            <View style={{ marginTop: 20 }}>
+            <View style={{
+                marginTop: 20,
+                borderBottomWidth: 1,
+                paddingBottom: 16,
+                borderBottomColor: '#EEEDED'
+            }}>
                 <TouchableOpacity
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'center',
                         padding: 12,
-                        backgroundColor: '#FFFFFF',
-                        borderWidth: 1,
-                        borderColor: '#E4E4E4',
-                        borderRadius: 8,
+                        backgroundColor: '#2E2E2E',
+                        borderRadius: 12,
                     }}
                     onPress={() => navigation.navigate('MemorizationProgress')}
                 >
                     <Text
                         style={{
                             marginRight: 8,
-                            color: '#484848',
-                            fontWeight: '500'
+                            color: '#FFFFFF',
+                            fontWeight: '600',
                         }}
                     >
-                        Lihat seluruh progress hafalan
+                        Lihat Seluruh Progress Menghafal
                     </Text>
-                    <FontAwesome name="angle-right" size={14} color="#484848" />
+                    {/* <FontAwesome name="angle-right" size={20} color="#FFFFFF" /> */}
                 </TouchableOpacity>
             </View>
             <View>

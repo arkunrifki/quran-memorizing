@@ -10,7 +10,7 @@ const Homepage = ({ navigation }) => {
             <SafeAreaView>
                 <ScrollView>
                     <UpperSection navigation={navigation} />
-                    <LowerSection />
+                    <LowerSection navigation={navigation} />
                 </ScrollView>
                 <StatusBar style="dark" />
             </SafeAreaView>

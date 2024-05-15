@@ -10,6 +10,7 @@ const initialState = {
     currentIndex: 0,
     currentIteration: 1,
     loop: 1,
+    rawData: {}
 }
 
 const PlayerReducer = (state, { type, payload }) => {
@@ -68,6 +69,11 @@ const PlayerReducer = (state, { type, payload }) => {
             return {
                 ...state,
                 loop: state.loop - 1,
+            }
+        case 'SET_RAW_DATA':
+            return {
+                ...state,
+                rawData: payload,
             }
     }
 }

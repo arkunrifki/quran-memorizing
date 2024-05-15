@@ -1,12 +1,24 @@
 import { View, TouchableOpacity, Text } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import { SurahItems } from 'utils/constants';
 
 const MemorizationHistoryItem = ({
     surah,
     ayah,
     memorizedAt,
     style,
+    navigation,
+    item
 }) => {
+
+    const navigateToSurah = () => {
+        const surahContent = SurahItems[Number(item.surahNumber) - 1]
+        if (!surahContent?.hasOwnProperty('page')) return navigation.navigate('Mushaf')
+        return navigation.navigate('Mushaf', {
+            pageIndex: Number(surahContent?.page)
+        })
+    }
+    
     return (
         <TouchableOpacity
             style={{
@@ -21,6 +33,7 @@ const MemorizationHistoryItem = ({
                 justifyContent: 'space-between',
                 alignItems: 'center'
             }}
+            onPress={navigateToSurah}
         >
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
                 <Ionicons name="checkmark-circle-sharp" size={16} color="#13A355" />

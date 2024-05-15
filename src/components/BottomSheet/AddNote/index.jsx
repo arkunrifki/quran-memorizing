@@ -91,8 +91,6 @@ const AddNoteModalContent = ({
 
     useEffect(() => {
         if (targetContent) {
-            console.log(targetContent.surahNumber)
-            console.log(targetContent.ayahNumber)
             if (
                 userDataState.notes[targetContent.surahNumber]
                 && userDataState.notes[targetContent.surahNumber][targetContent.ayahNumber]
@@ -127,7 +125,7 @@ const AddNoteModalContent = ({
                     )
                 }
             </View>
-            <View style={{ height: '80%'}}>
+            <View style={{ height: '60%'}}>
                 <TextInput
                     style={{
                         backgroundColor: '#f5f5f5',

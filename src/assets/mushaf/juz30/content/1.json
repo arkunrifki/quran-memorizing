@@ -1,25 +1,1137 @@
 [
   {
     "key": "581-1",
-    "verse": "97:1",
+    "verse": "78:1",
     "coord": [
       {
-        "key": "97:1:1",
+        "key": "78:1:1",
         "top": 21.6,
-        "right": 3,
-        "width": 39,
+        "right": 2.2,
+        "width": 26.1,
         "height": 4.7
       }
     ],
     "covers": {
-      "firstWord": [],
+      "firstWord": [
+        {
+          "key": "78:1:1",
+          "top": 21.6,
+          "right": 8.2,
+          "width": 15,
+          "height": 4.7
+        }
+      ],
       "invisible": [
         {
-          "key": "97:1:1",
+          "key": "78:1:1",
           "top": 21.6,
-          "right": 3,
+          "right": 2.2,
+          "width": 21,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-2",
+    "verse": "78:2",
+    "coord": [
+      {
+        "key": "78:2:1",
+        "top": 21.6,
+        "right": 28.4,
+        "width": 28.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:2:1",
+          "top": 21.6,
+          "right": 34.4,
+          "width": 17,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:2:1",
+          "top": 21.6,
+          "right": 28.4,
+          "width": 23,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-3",
+    "verse": "78:3",
+    "coord": [
+      {
+        "key": "78:3:1",
+        "top": 21.6,
+        "right": 56.75,
+        "width": 36.2,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:3:1",
+          "top": 21.6,
+          "right": 65.25,
+          "width": 22.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:3:1",
+          "top": 21.6,
+          "right": 56.75,
+          "width": 31,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-4",
+    "verse": "78:4",
+    "coord": [
+      {
+        "key": "78:4:1",
+        "top": 26.7,
+        "right": 2.2,
+        "width": 26.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:4:1",
+          "top": 26.7,
+          "right": 8.2,
+          "width": 15,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:4:1",
+          "top": 26.7,
+          "right": 2.2,
+          "width": 21,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-5",
+    "verse": "78:5",
+    "coord": [
+      {
+        "key": "78:5:1",
+        "top": 26.7,
+        "right": 28.75,
+        "width": 28.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:5:1",
+          "top": 26.7,
+          "right": 31.95,
+          "width": 20.3,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:5:1",
+          "top": 26.7,
+          "right": 28.75,
+          "width": 23.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-6",
+    "verse": "78:6",
+    "coord": [
+      {
+        "key": "78:6:1",
+        "top": 26.7,
+        "right": 57.5,
+        "width": 36.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:6:1",
+          "top": 26.7,
+          "right": 62.25,
+          "width": 26.25,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:6:1",
+          "top": 26.7,
+          "right": 57.5,
+          "width": 31,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-7",
+    "verse": "78:7",
+    "coord": [
+      {
+        "key": "78:7:1",
+        "top": 31.8,
+        "right": 2.2,
+        "width": 27.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:7:1",
+          "top": 31.8,
+          "right": 15.2,
+          "width": 9,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:7:1",
+          "top": 31.8,
+          "right": 2.2,
+          "width": 22,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-8",
+    "verse": "78:8",
+    "coord": [
+      {
+        "key": "78:8:1",
+        "top": 31.8,
+        "right": 31,
+        "width": 30.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:8:1",
+          "top": 31.8,
+          "right": 46.5,
+          "width": 9.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:8:1",
+          "top": 31.8,
+          "right": 31,
+          "width": 25,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-9",
+    "verse": "78:9",
+    "coord": [
+      {
+        "key": "78:9:1",
+        "top": 31.8,
+        "right": 61.75,
+        "width": 32,
+        "height": 4.7
+      },
+      {
+        "key": "78:9:2",
+        "top": 36.9,
+        "right": 2.2,
+        "width": 5.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:9:1",
+          "top": 31.8,
+          "right": 74.75,
+          "width": 19,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:9:1",
+          "top": 31.8,
+          "right": 61.75,
+          "width": 32,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-10",
+    "verse": "78:10",
+    "coord": [
+      {
+        "key": "78:10:1",
+        "top": 36.9,
+        "right": 7.2,
+        "width": 35.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:10:1",
+          "top": 36.9,
+          "right": 20.25,
+          "width": 17.45,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:10:1",
+          "top": 36.9,
+          "right": 7.2,
+          "width": 30.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-11",
+    "verse": "78:11",
+    "coord": [
+      {
+        "key": "78:11:1",
+        "top": 36.9,
+        "right": 42.9,
+        "width": 39.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:11:1",
+          "top": 36.9,
+          "right": 56.25,
+          "width": 20.75,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:11:1",
+          "top": 36.9,
+          "right": 42.9,
+          "width": 34,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-12",
+    "verse": "78:12",
+    "coord": [
+      {
+        "key": "78:12:1",
+        "top": 36.9,
+        "right": 82.25,
+        "width": 11.5,
+        "height": 4.7
+      },
+      {
+        "key": "78:12:2",
+        "top": 42.05,
+        "right": 2.2,
+        "width": 36.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:12:1",
+          "top": 42.05,
+          "right": 2.2,
+          "width": 31.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:12:1",
+          "top": 36.9,
+          "right": 82.25,
+          "width": 11.5,
+          "height": 4.7
+        },
+        {
+          "key": "78:12:2",
+          "top": 42.05,
+          "right": 2.2,
+          "width": 31.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-13",
+    "verse": "78:13",
+    "coord": [
+      {
+        "key": "78:13:1",
+        "top": 42.05,
+        "right": 40,
+        "width": 40.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:13:1",
+          "top": 42.05,
+          "right": 53,
+          "width": 22.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:13:1",
+          "top": 42.05,
+          "right": 40,
+          "width": 35.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-14",
+    "verse": "78:14",
+    "coord": [
+      {
+        "key": "78:14:1",
+        "top": 42.05,
+        "right": 82,
+        "width": 11.5,
+        "height": 4.7
+      },
+      {
+        "key": "78:14:2",
+        "top": 47.15,
+        "right": 2.2,
+        "width": 40.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:14:1",
+          "top": 47.15,
+          "right": 2.2,
+          "width": 35,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:14:1",
+          "top": 42.05,
+          "right": 82,
+          "width": 11.5,
+          "height": 4.7
+        },
+        {
+          "key": "78:14:2",
+          "top": 47.15,
+          "right": 2.2,
+          "width": 35,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-15",
+    "verse": "78:15",
+    "coord": [
+      {
+        "key": "78:15:1",
+        "top": 47.15,
+        "right": 42.47,
+        "width": 38.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:15:1",
+          "top": 47.15,
+          "right": 53.5,
+          "width": 21.97,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:15:1",
+          "top": 47.15,
+          "right": 42.47,
+          "width": 33,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-16",
+    "verse": "78:16",
+    "coord": [
+      {
+        "key": "78:16:1",
+        "top": 47.15,
+        "right": 81.5,
+        "width": 12,
+        "height": 4.7
+      },
+      {
+        "key": "78:16:2",
+        "top": 52.35,
+        "right": 2.2,
+        "width": 14.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:16:1",
+          "top": 52.35,
+          "right": 2.2,
+          "width": 9.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:16:1",
+          "top": 47.15,
+          "right": 81.5,
+          "width": 12,
+          "height": 4.7
+        },
+        {
+          "key": "78:16:2",
+          "top": 52.35,
+          "right": 2.2,
+          "width": 9.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-17",
+    "verse": "78:17",
+    "coord": [
+      {
+        "key": "78:17:1",
+        "top": 52.35,
+        "right": 17.5,
+        "width": 45.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:17:1",
+          "top": 52.35,
+          "right": 23,
+          "width": 34.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:17:1",
+          "top": 52.35,
+          "right": 17.5,
+          "width": 40,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-18",
+    "verse": "78:18",
+    "coord": [
+      {
+        "key": "78:18:1",
+        "top": 52.35,
+        "right": 62.75,
+        "width": 30,
+        "height": 4.7
+      },
+      {
+        "key": "78:18:2",
+        "top": 57.45,
+        "right": 2.2,
+        "width": 24.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:18:1",
+          "top": 52.35,
+          "right": 69,
+          "width": 23.75,
+          "height": 4.7
+        },
+        {
+          "key": "78:18:2",
+          "top": 57.45,
+          "right": 2.2,
+          "width": 19.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:18:1",
+          "top": 52.35,
+          "right": 62.75,
+          "width": 30,
+          "height": 4.7
+        },
+        {
+          "key": "78:18:2",
+          "top": 57.45,
+          "right": 2.2,
+          "width": 19.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-19",
+    "verse": "78:19",
+    "coord": [
+      {
+        "key": "78:19:1",
+        "top": 57.45,
+        "right": 27.3,
+        "width": 50.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:19:1",
+          "top": 57.45,
+          "right": 41.3,
+          "width": 31,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:19:1",
+          "top": 57.45,
+          "right": 27.3,
+          "width": 45,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-20",
+    "verse": "78:20",
+    "coord": [
+      {
+        "key": "78:20:1",
+        "top": 57.45,
+        "right": 77.75,
+        "width": 15.5,
+        "height": 4.7
+      },
+      {
+        "key": "78:20:2",
+        "top": 62.55,
+        "right": 2.2,
+        "width": 36.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:20:1",
+          "top": 62.55,
+          "right": 2.2,
+          "width": 31,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:20:1",
+          "top": 57.45,
+          "right": 77.75,
+          "width": 15.5,
+          "height": 4.7
+        },
+        {
+          "key": "78:20:2",
+          "top": 62.55,
+          "right": 2.2,
+          "width": 31,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-21",
+    "verse": "78:21",
+    "coord": [
+      {
+        "key": "78:21:1",
+        "top": 62.55,
+        "right": 39,
+        "width": 39.85,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:21:1",
+          "top": 62.55,
+          "right": 44.25,
+          "width": 29.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:21:1",
+          "top": 62.55,
+          "right": 39,
+          "width": 34.75,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-22",
+    "verse": "78:22",
+    "coord": [
+      {
+        "key": "78:22:1",
+        "top": 62.55,
+        "right": 78.85,
+        "width": 14.75,
+        "height": 4.7
+      },
+      {
+        "key": "78:22:2",
+        "top": 67.65,
+        "right": 2.2,
+        "width": 13.85,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:22:1",
+          "top": 67.65,
+          "right": 2.2,
+          "width": 8.75,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:22:1",
+          "top": 62.55,
+          "right": 78.85,
+          "width": 14.75,
+          "height": 4.7
+        },
+        {
+          "key": "78:22:2",
+          "top": 67.65,
+          "right": 2.2,
+          "width": 8.75,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-23",
+    "verse": "78:23",
+    "coord": [
+      {
+        "key": "78:23:1",
+        "top": 67.7,
+        "right": 16.25,
+        "width": 33.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:23:1",
+          "top": 67.7,
+          "right": 25.25,
+          "width": 19.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:23:1",
+          "top": 67.7,
+          "right": 16.25,
+          "width": 28.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-24",
+    "verse": "78:24",
+    "coord": [
+      {
+        "key": "78:24:1",
+        "top": 67.7,
+        "right": 50,
+        "width": 43.5,
+        "height": 4.7
+      },
+      {
+        "key": "78:24:2",
+        "top": 72.85,
+        "right": 2.2,
+        "width": 5.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:24:1",
+          "top": 67.7,
+          "right": 54.5,
           "width": 39,
           "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:24:1",
+          "top": 67.7,
+          "right": 50,
+          "width": 43.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-25",
+    "verse": "78:25",
+    "coord": [
+      {
+        "key": "78:25:1",
+        "top": 72.85,
+        "right": 7.4,
+        "width": 37.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:25:1",
+          "top": 72.85,
+          "right": 13.75,
+          "width": 26.25,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:25:1",
+          "top": 72.85,
+          "right": 7.4,
+          "width": 32.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-26",
+    "verse": "78:26",
+    "coord": [
+      {
+        "key": "78:26:1",
+        "top": 72.85,
+        "right": 45,
+        "width": 27.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:26:1",
+          "top": 72.85,
+          "right": 55.5,
+          "width": 12,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:26:1",
+          "top": 72.85,
+          "right": 45,
+          "width": 22.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-27",
+    "verse": "78:27",
+    "coord": [
+      {
+        "key": "78:27:1",
+        "top": 72.85,
+        "right": 73,
+        "width": 20,
+        "height": 4.7
+      },
+      {
+        "key": "78:27:2",
+        "top": 77.95,
+        "right": 2.2,
+        "width": 32.6,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:27:1",
+          "top": 72.85,
+          "right": 82,
+          "width": 11,
+          "height": 4.7
+        },
+        {
+          "key": "78:27:2",
+          "top": 77.95,
+          "right": 2.2,
+          "width": 27.5,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:27:1",
+          "top": 72.85,
+          "right": 73,
+          "width": 20,
+          "height": 4.7
+        },
+        {
+          "key": "78:27:2",
+          "top": 77.95,
+          "right": 2.2,
+          "width": 27.5,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-28",
+    "verse": "78:28",
+    "coord": [
+      {
+        "key": "78:28:1",
+        "top": 77.95,
+        "right": 34.9,
+        "width": 43.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:28:1",
+          "top": 77.95,
+          "right": 46.5,
+          "width": 26.4,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:28:1",
+          "top": 77.95,
+          "right": 34.9,
+          "width": 38,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-29",
+    "verse": "78:29",
+    "coord": [
+      {
+        "key": "78:29:1",
+        "top": 77.95,
+        "right": 78,
+        "width": 15.5,
+        "height": 4.7
+      },
+      {
+        "key": "78:29:2",
+        "top": 83.05,
+        "right": 2.2,
+        "width": 31.1,
+        "height": 4.7
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:29:1",
+          "top": 77.95,
+          "right": 85.25,
+          "width": 8.25,
+          "height": 4.7
+        },
+        {
+          "key": "78:29:2",
+          "top": 83.05,
+          "right": 2.2,
+          "width": 26,
+          "height": 4.7
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:29:1",
+          "top": 77.95,
+          "right": 78,
+          "width": 15.5,
+          "height": 4.7
+        },
+        {
+          "key": "78:29:2",
+          "top": 83.05,
+          "right": 2.2,
+          "width": 26,
+          "height": 4.7
+        }
+      ]
+    }
+  },
+  {
+    "key": "581-30",
+    "verse": "78:30",
+    "coord": [
+      {
+        "key": "78:30:1",
+        "top": 83.05,
+        "right": 33.75,
+        "width": 59.1,
+        "height": 4.95
+      }
+    ],
+    "covers": {
+      "firstWord": [
+        {
+          "key": "78:30:1",
+          "top": 83.05,
+          "right": 47,
+          "width": 40.75,
+          "height": 4.95
+        }
+      ],
+      "invisible": [
+        {
+          "key": "78:30:1",
+          "top": 83.05,
+          "right": 33.75,
+          "width": 54,
+          "height": 4.95
         }
       ]
     }

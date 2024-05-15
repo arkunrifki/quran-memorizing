@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0,
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'space-between',
         paddingLeft: 12,
         flexGrow: 1,
+        width: '80%'
     }
 })
 
@@ -30,7 +30,7 @@ const TikrarCount = () => {
                 <TouchableOpacity
                     style={{
                         backgroundColor: '#FFFFFF',
-                        flexGrow: 0,
+                        flexGrow: 1,
                         width: 32,
                         height: 32,
                         alignItems: 'center',
@@ -51,7 +51,8 @@ const TikrarCount = () => {
                         borderWidth: 1,
                         borderColor: '#EEEEEE',
                         marginLeft: 8,
-                        flexGrow: 7,
+                        flexGrow: 19,
+                        position: 'relative'
                     }}
                 >
                     <View
@@ -71,7 +72,28 @@ const TikrarCount = () => {
                         />
                     </View>
                 </View>
-                <Text style={{ marginLeft: 8, flexGrow: 1 }}>{`${mushafState.count}/${mushafState.maxCount}`}</Text>
+                <View
+                     style={{
+                        marginLeft: 4,
+                        flexGrow: 1,
+                        alignItems: 'center',
+                     }}
+                >
+                    <Text>{`${mushafState.count}/${mushafState.maxCount}`}</Text>
+                </View>
+                <View
+                    style={{
+                        paddingVertical: 4,
+                        paddingHorizontal: 8,
+                        borderRadius: 999,
+                        backgroundColor: '#16a34a',
+                        marginRight: 8,
+                    }}
+                >
+                    <Text style={{ color: '#FFFFFF', fontWeight: '600' }}>
+                        {mushafState?.counterRound}
+                    </Text>
+                </View>
             </View>
     )
 }

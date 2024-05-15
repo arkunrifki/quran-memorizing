@@ -6,6 +6,7 @@ const TouchHandler = ({
     ayahPositions = [],
     versePress = () => {},
     verseLongPress = () => {},
+    highlightedAyah = null
 }) => {
     return (
         <View
@@ -33,6 +34,7 @@ const TouchHandler = ({
                             onLongPress={verseLongPress}
                             ayah={ayah}
                             active={activeAyah === ayah}
+                            highlightedAyah={highlightedAyah}
                         />
                     )
                 })

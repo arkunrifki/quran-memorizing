@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { SafeAreaView, Dimensions, FlatList } from "react-native";
+import { SafeAreaView, Dimensions, FlatList, ScrollView } from "react-native";
 import ContentMapper from "assets/mushaf/ContentMapper";
 import { useMushafState } from "context/MushafContext";
 import RenderPage from "./RenderPage";
@@ -11,10 +11,15 @@ const { width } = Dimensions.get("window");
 const QuranPages = ({
   showMenu,
   setShowMenu,
+  pageIndex,
+  highlightedAyahValue,
   handleDisplayAyahMenu = () => {},
 }) => {
+  // console.log('renderer', initialJuz, initialPage)
   const [activeJuz, setActiveJuz] = useState(30);
-  const [pages] = useState([
+  const [highlightedAyah,setHighlightedAyah] = useState(highlightedAyahValue)
+
+  const [pages, setPages] = useState([
     "23",
     "22",
     "21",
@@ -50,8 +55,8 @@ const QuranPages = ({
   const { playerState, dispatch: playerDispatch } = usePlayerProvider();
 
   // START – DEVELOPMENT VARIABLES
-  const [firstWordCovers, setFirstWordCovers] = useState({});
-  const [invisibleCovers, setInvisibleCovers] = useState({});
+  // const [firstWordCovers, setFirstWordCovers] = useState({});
+  // const [invisibleCovers, setInvisibleCovers] = useState({});
   // END – DEVELOPMENT VARIABLES
 
   // Active Ayah
@@ -72,9 +77,10 @@ const QuranPages = ({
   const versePress = () => {
     setActiveAyah(null);
     setShowMenu(!showMenu);
+    if (!!highlightedAyah) setHighlightedAyah(null)
     console.log("press");
   };
-
+  
   useEffect(() => {
     if (activePage) {
       setActiveAyah(null);
@@ -105,6 +111,15 @@ const QuranPages = ({
         currentContent[currentContent.length - 1].verse.split(":");
       if (playerState.status === "stopped") {
         playerDispatch({
+          type: "SET_RAW_DATA",
+          payload: {
+            surahStart,
+            ayahStart,
+            surahEnd,
+            ayahEnd,
+          }
+        })
+        playerDispatch({
           type: "SET_PLAYLIST",
           payload: generatePlaylistItems(
             Number(surahStart),
@@ -130,43 +145,72 @@ const QuranPages = ({
     }, 1000);
   }, []);
 
-  // START – DEVELOPMENT VARIABLES
   useEffect(() => {
-    if (currentContent) {
-      const newFirstWordCovers = currentContent
-        .map((ayah) => {
-          return ayah.covers["firstWord"];
-        })
-        .reduce((acc, cur) => {
-          return [...acc, ...cur];
-        }, []);
-      setFirstWordCovers(newFirstWordCovers);
-      const newInvisibleCovers = currentContent
-        .map((ayah) => {
-          return ayah.covers["invisible"];
-        })
-        .reduce((acc, cur) => {
-          return [...acc, ...cur];
-        }, []);
-      setInvisibleCovers(newInvisibleCovers);
+    setTimeout(() => {
+      if (!!highlightedAyah) setHighlightedAyah(null)
+    },5000)
+  },[])
+
+  // Scroll to page
+  useEffect(() => {
+    if (typeof pageIndex === "number") {
+      flatListRef.current.scrollToIndex({
+        index: pageIndex,
+        animated: false,
+      });
     }
-  }, [currentContent]);
+  }, [pageIndex]);
+
+  // START – DEVELOPMENT VARIABLES
+  // useEffect(() => {
+  //   if (currentContent) {
+  //     const newFirstWordCovers = currentContent
+  //       .map((ayah) => {
+  //         return ayah.covers["firstWord"];
+  //       })
+  //       .reduce((acc, cur) => {
+  //         return [...acc, ...cur];
+  //       }, []);
+  //     setFirstWordCovers(newFirstWordCovers);
+  //     const newInvisibleCovers = currentContent
+  //       .map((ayah) => {
+  //         return ayah.covers["invisible"];
+  //       })
+  //       .reduce((acc, cur) => {
+  //         return [...acc, ...cur];
+  //       }, []);
+  //     setInvisibleCovers(newInvisibleCovers);
+  //   }
+  // }, [currentContent]);
   // END – DEVELOPMENT VARIABLES
 
   return (
-    <SafeAreaView>
+    <ScrollView>
       <FlatList
+        style={{
+          // height: '50%',
+          // aspectRatio: 0.506,
+          position: "relative",
+        }}
         ref={flatListRef}
         viewabilityConfig={viewConfigRef.current}
         onViewableItemsChanged={onViewChanged.current}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         pagingEnabled={true}
-        snapToInterval={width}
-        snapToAlignment={"center"}
-        decelerationRate={0}
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
+        initialScrollIndex={pageIndex}
+        // snapToInterval={width}
+        // snapToAlignment={"center"}
+        // decelerationRate={0}
         data={pages}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => {
+          return item;
+        }}
         renderItem={(page) => {
           if (!content) return <></>;
           return (
@@ -196,15 +240,16 @@ const QuranPages = ({
                   return [...acc, ...cur];
                 }, [])}
               activePage={activePage}
+              highlightedAyah={highlightedAyah}
               // START – DEVELOPMENT VARIABLES
-              invisibleCovers={invisibleCovers}
-              firstWordCovers={firstWordCovers}
+              // invisibleCovers={invisibleCovers}
+              // firstWordCovers={firstWordCovers}
               // END – DEVELOPMENT VARIABLES
             />
           );
         }}
       />
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

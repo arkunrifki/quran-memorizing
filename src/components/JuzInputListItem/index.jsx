@@ -3,14 +3,12 @@ import Checkbox from 'expo-checkbox'
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFFFFF',
         paddingTop: 12,
         paddingBottom: 12,
         paddingLeft: 20,
         paddingRight: 20,
         marginBottom: 8,
         borderWidth: 1,
-        borderColor: '#DFDFDF',
         borderRadius: 12,
         flex: 1,
         flexDirection: 'row',
@@ -21,7 +19,14 @@ const styles = StyleSheet.create({
 
 const JuzInputListItem = ({ juz, checked = false, onPress = () => {} }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <TouchableOpacity
+            style={{
+                ...styles.container,
+                backgroundColor: checked ? '#f0fdf4' : '#FFFFFF',
+                borderColor: checked ? '#86efac' : '#D1D5DB'
+            }}
+            onPress={onPress}
+        >
             <Text style={{ color: '#000000', fontSize: 20}}>{juz.item.label}</Text>
             <Checkbox
                 style={{
@@ -33,6 +38,7 @@ const JuzInputListItem = ({ juz, checked = false, onPress = () => {} }) => {
                 }}
                 value={checked}
                 color={checked ? '#1DC25D' : null}
+                onValueChange={onPress}
             />
         </TouchableOpacity>
     )

@@ -1,10 +1,22 @@
 import { useEffect, useState } from 'react';
-import { TouchableOpacity, View, Animated  } from 'react-native'
+import { TouchableOpacity, View, Animated, Text, StyleSheet, Image  } from 'react-native'
 import { FontAwesome5, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useMushafState } from 'context/MushafContext';
+// import TikrarPlus from 'assets/TikrarPlus.png';
 
 import { Audio } from 'expo-av'
 import { usePlayerProvider } from 'context/PlayerContext';
+
+const styles = StyleSheet.create({
+    buttonContainer: {
+        width: 48,
+        alignItems: 'center'
+    },
+    buttonText: {
+        marginTop: 4,
+        fontSize: 10,
+    }
+})
 
 const MushafMenuBar = ({
     bottom = 13,
@@ -203,7 +215,7 @@ const MushafMenuBar = ({
         <Animated.View
             style={{
                 width: '100%',
-                height: 85,
+                height: 70,
                 backgroundColor: '#FFFFFF',
                 position: 'absolute',
                 bottom: bottom,
@@ -227,11 +239,17 @@ const MushafMenuBar = ({
                     >
                         {
                             (status === 'stopped' || status === 'paused') &&
-                            <FontAwesome name="play" size={24} color="#A0A0A0" />
+                            <View style={styles.buttonContainer}>
+                                <FontAwesome name="play" size={24} color="#A0A0A0" />
+                                <Text style={styles.buttonText}>Putar</Text>
+                            </View>
                         }
                         {
                             status === 'playing' &&
-                            <FontAwesome name="pause" size={24} color="#A0A0A0" />
+                            <View style={styles.buttonContainer}>
+                                <FontAwesome name="pause" size={24} color="#A0A0A0" />
+                                <Text style={styles.buttonText}>Pause</Text>
+                            </View>
                         }
                     </TouchableOpacity>
                     {
@@ -246,7 +264,10 @@ const MushafMenuBar = ({
                                 }}
                                 onPress={handleDisplayAudioConfig}
                             >
-                                <MaterialCommunityIcons name="cog-play" size={24} color="#A0A0A0" />
+                                <View style={styles.buttonContainer}>
+                                    <MaterialCommunityIcons name="cog-play" size={24} color="#A0A0A0" />
+                                    <Text style={styles.buttonText}>Audio</Text>
+                                </View>
                             </TouchableOpacity>
                         )
                     }
@@ -266,7 +287,10 @@ const MushafMenuBar = ({
                                     })
                                 }}
                             >
-                                <FontAwesome name="stop" size={24} color="#A0A0A0" />
+                                <View style={styles.buttonContainer}>
+                                    <FontAwesome name="stop" size={24} color="#A0A0A0" />
+                                    <Text style={styles.buttonText}>Stop</Text>
+                                </View>
                             </TouchableOpacity>
                         )
                     }
@@ -284,7 +308,15 @@ const MushafMenuBar = ({
                     onPress={mushafState.tikrarMethod === 'count' ? increaseCounter : toggleTimerState}
                 >
                     {mushafState.tikrarMethod === 'count' ? (
-                        <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
+                        <Image
+                            style={{
+                                width: 35,
+                                height: 32,
+                                marginLeft: 2,
+                            }}
+                            source={require('../../assets/tikrarPlus.png')}
+                        />
+                        // <FontAwesome5 name="angle-double-up" size={32} color="#FFFFFF" style={{ marginBottom: 0 }} />
                     ): mushafState.timerState === 'iddle' ? (
                         <FontAwesome5 name="stopwatch" size={32} color="#FFFFFF" />
                     ): (
@@ -293,16 +325,22 @@ const MushafMenuBar = ({
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexGrow: 1}}>
                     <TouchableOpacity
-                        style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20 }}
+                        style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 8 }}
                         onPress={handleViewTranslation}
                     >
-                        <FontAwesome5 name="globe-asia" size={24} color="#A0A0A0" />
+                        <View style={styles.buttonContainer}>
+                            <FontAwesome5 name="globe-asia" size={24} color="#A0A0A0" />
+                            <Text style={styles.buttonText}>Terjemah</Text>
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 20}}
+                        style={{ marginLeft: 0, alignItems: 'center', paddingVertical: 8, paddingHorizontal: 8}}
                         onPress={handleToggleViewMode}
                     >
-                        <FontAwesome name="eye" size={24} color={visibilityMode === 'all' ? '#A0A0A0' : '#16a34a'} />
+                        <View styles={styles.buttonContainer}>
+                            <FontAwesome name="eye" size={24} color={visibilityMode === 'all' ? '#A0A0A0' : '#16a34a'} style={{ marginLeft: 8}} />
+                            <Text style={styles.buttonText}>Tutup Ayat</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
